@@ -1,0 +1,48 @@
+{
+  "name": "@caldwell619/mui-form-generator-nextjs-example",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
+    "lint": "next lint",
+    "dev": "next dev",
+    "build": "next build && next export",
+    "deploy": ". .env && sh scripts/deploy.sh"
+  },
+  "dependencies": {
+    "@caldwell619/mui-form-generator": "link:../../",
+    "@caldwell619/react-hooks": "^0.0.7",
+    "@date-io/date-fns": "^2.11.0",
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/lab": "^5.0.0-alpha.59",
+    "@mui/material": "latest",
+    "date-fns": "^2.27.0",
+    "deep-object-diff": "^1.1.0",
+    "next": "12.0.0",
+    "next-seo": "^4.28.1",
+    "react": "link:../../react",
+    "react-dom": "link:../../node_modules/react-dom"
+  },
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.3.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/react-swipeable-views": "^0.13.1",
+    "@types/react-swipeable-views-utils": "^0.13.3",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "next-compose-plugins": "^2.2.1",
+    "next-optimized-images": "^2.6.2",
+    "prettier": "^2.4.1",
+    "rc": "^1.2.8",
+    "typescript": "latest",
+    "webpack-bundle-analyzer": "^4.4.2"
+  }
+}

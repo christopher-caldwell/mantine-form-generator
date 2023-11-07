@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["dom", "esnext"],
+    "jsx": "react-jsx",
+    "incremental": true,
+    "sourceMap": true,
+    "types": [],
+    "declaration": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules", "dist"]
+}

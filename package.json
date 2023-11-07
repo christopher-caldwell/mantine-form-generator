@@ -1,0 +1,51 @@
+{
+  "name": "@caldwell619/mantine-form-generator",
+  "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://christopher-caldwell.github.io/mantine-form-generator",
+  "scripts": {
+    "lint": "eslint --ext .ts,.tsx src",
+    "format": "prettier --write src",
+    "build": "tsc && npx tscpaths -p tsconfig.json -s src -o dist",
+    "build:watch": "nodemon --exec npm run build --watch src --ext .tsx,.ts --delay 2.5",
+    "release": "standard-version",
+    "publish-release": "git push --follow-tags origin master && yarn publish",
+    "publish:release": "sh publish.sh",
+    "predeploy": "cd demo && yarn install && yarn run build",
+    "deploy": "gh-pages -d demo/dist"
+  },
+  "peerDependencies": {
+    "@mantine/core": ">=5",
+    "react-hook-form": ">=7"
+  },
+  "devDependencies": {
+    "@mantine/core": "^7.2.1",
+    "@mantine/hooks": "^7.2.1",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.53.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "gh-pages": "^6.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "standard-version": "^9.5.0",
+    "tscpaths": "^0.0.9",
+    "typescript": "^5.2.2"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ]
+}
