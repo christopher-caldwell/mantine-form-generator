@@ -9,10 +9,10 @@ export const Layout: FC<LayoutProps> = ({ form, config, result }) => {
         <Flex h='100%' p='md' justify='space-between'>
           <Text fw={500}>@caldwell619/mantine-form-generator</Text>
           <Group>
-            <Anchor href=''>
+            <Anchor href='https://github.com/christopher-caldwell/mantine-form-generator' target='_blank' rel='noopener noreferrer'>
               <IconBrandGithub />
             </Anchor>
-            <Anchor href=''>
+            <Anchor href='https://www.npmjs.com/package/@caldwell619/mantine-form-generator' target='_blank' rel='noopener noreferrer'>
               <IconBrandNpm />
             </Anchor>
           </Group>
