@@ -112,13 +112,13 @@ const inputs: Config<SomeObject>[] = [
   {
     type: 'checkbox',
     config: {
-      // helperText: 'Everyone loves ice cream',
       control: {
         gridColProps: { span: { xs: 12, md: 6 } },
         name: 'doesWantIceCream'
       },
       checkboxProps: {
-        label: 'Do you want Ice Cream?'
+        label: 'Do you want Ice Cream?',
+        description: 'Everyone loves ice cream'
       }
     }
   }
@@ -168,6 +168,11 @@ const inputs: Config<SomeObject>[] = [
 export const configAtom = atom({
   key: 'config',
   default: JSON.stringify(inputs, null, '  ')
+})
+
+export const resultAtom = atom({
+  key: 'result',
+  default: 'Submit the form to see the resulting output'
 })
 
 export type SomeObject = {

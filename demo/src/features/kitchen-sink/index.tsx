@@ -4,16 +4,18 @@ import { Button, Alert, Stack } from '@mantine/core'
 import { UseFormReturn } from 'react-hook-form'
 import diff from 'microdiff'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
-import { useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
-import { configAtom, configSelector, SomeObject } from '../../store'
+import { configAtom, configSelector, resultAtom, SomeObject } from '../../store'
 import { defaultValues } from './data'
 
 export const KitchenSinkForm: FC = () => {
   const { inputs, hasError } = useRecoilValue(configSelector)
+  const setResult = useSetRecoilState(resultAtom)
   const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MantineFormContext)
   const onSubmit = (data: SomeObject) => {
     // Here you can do a diff to get what was updated - or whatever you wish to do.
+    setResult(JSON.stringify(data, null, 2))
     const patchDiff = diff(defaultValues, data)
     console.log('the difference between default and the inputs is:', patchDiff)
   }
