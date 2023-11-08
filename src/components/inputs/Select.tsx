@@ -1,31 +1,17 @@
-import { useContext } from 'react'
 import { Controller, FieldValues } from 'react-hook-form'
-import { GridCol, SelectProps, Select } from '@mantine/core'
+import { GridCol, SelectProps, Select, NativeSelect, NativeSelectProps } from '@mantine/core'
 
-import { MuiFormContext } from '@/providers'
-import { FormInputProps, SelectOption } from './shared'
+import { useMantineFormContext } from '@/providers'
+import { FormInputProps } from './shared'
 
 export const FormInputSelect = function <TData extends FieldValues>({
   name,
-  label,
+  nativeSelectProps,
   rules,
-  options,
   selectProps,
   gridColProps
 }: Props<TData>) {
-  const { control } = useContext(MuiFormContext)
-
-  // const OptionsDisplay = inputProps?.SelectProps?.native
-  //   ? options.map(({ value, label }) => (
-  //       <option key={value} value={value}>
-  //         {label}
-  //       </option>
-  //     ))
-  //   : options.map(({ value, label }) => (
-  //       <MenuItem key={value} value={value}>
-  //         {label}
-  //       </MenuItem>
-  //     ))
+  const { control } = useMantineFormContext<TData>()
 
   return (
     <GridCol {...gridColProps}>
@@ -33,33 +19,41 @@ export const FormInputSelect = function <TData extends FieldValues>({
         rules={rules}
         name={name}
         control={control}
-        render={({ field: { onChange, value = '', onBlur }, fieldState: { error } }) => (
-          <Select value={value} onChange={onChange} {...selectProps} onBlur={onBlur} error={error?.message} />
-
-          // <TextField
-          //   {...inputProps}
-          //   select
-          //   fullWidth
-          //   onChange={onChange}
-          //   value={value}
-          //   label={label}
-          //   error={!!error}
-          //   helperText={error ? error.message || ' ' : inputProps?.helperText || ' '}
-          //   onBlur={e => {
-          //     inputProps?.onBlur?.(e)
-          //     onBlur()
-          //   }}
-          // >
-          //   {OptionsDisplay}
-          // </TextField>
-        )}
+        render={({ field: { onChange, value = '', onBlur }, fieldState: { error, invalid } }) => {
+          return (
+            <>
+              {nativeSelectProps ? (
+                <NativeSelect
+                  {...nativeSelectProps}
+                  value={value}
+                  onChange={onChange}
+                  error={error?.message || invalid}
+                />
+              ) : (
+                <Select
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  error={error?.message || invalid}
+                  {...selectProps}
+                />
+              )}
+            </>
+          )
+        }}
       />
     </GridCol>
   )
 }
 
-export type FormInputSelectProps = {
-  options: SelectOption[]
-  selectProps?: SelectProps
+type _SelectProps = {
+  nativeSelectProps?: never
+  selectProps: SelectProps
 }
+type _NativeSelectProps = {
+  nativeSelectProps: NativeSelectProps
+  selectProps?: never
+}
+
+export type FormInputSelectProps = _SelectProps | _NativeSelectProps
 type Props<TData extends FieldValues> = FormInputProps<TData> & FormInputSelectProps

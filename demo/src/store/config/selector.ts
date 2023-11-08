@@ -1,5 +1,5 @@
 import { selector } from 'recoil'
-import { Config } from '@caldwell619/mui-form-generator'
+import { Config } from '@caldwell619/mantine-form-generator'
 
 import { configAtom, SomeObject } from './atoms'
 

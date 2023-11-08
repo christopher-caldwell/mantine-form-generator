@@ -18,8 +18,8 @@ export const FormInputCheckbox = function <TData extends FieldValues>({
         name={name}
         control={control}
         rules={rules}
-        render={({ field: { onChange, value = false }, fieldState: { error } }) => (
-          <Checkbox checked={value} onChange={onChange} error={error?.message} {...checkboxProps} />
+        render={({ field: { onChange, value = false }, fieldState: { error, invalid } }) => (
+          <Checkbox checked={value} onChange={onChange} error={error?.message || invalid} {...checkboxProps} />
         )}
       />
     </GridCol>

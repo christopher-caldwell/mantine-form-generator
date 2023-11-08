@@ -1,21 +1,19 @@
-import { useContext } from 'react'
-import { Radio, RadioGroup, RadioProps, RadioGroupProps, Grid, GridCol } from '@mantine/core'
+import { Radio, RadioProps, RadioGroupProps, GridCol, Group, GroupProps } from '@mantine/core'
 import { Controller, FieldValues } from 'react-hook-form'
 
-import { MuiFormContext } from '@/providers'
-import { FormInputProps, SelectOption } from './shared'
+import { useMantineFormContext } from '@/providers'
+import { FormInputProps } from './shared'
 
 export const FormInputRadio = function <TData extends FieldValues>({
   name,
-  label,
   rules,
   options,
   radioGroupProps,
+  groupProps,
   globalRadioProps,
-  helperText,
   gridColProps
 }: Props<TData>) {
-  const { control } = useContext(MuiFormContext)
+  const { control } = useMantineFormContext<TData>()
 
   return (
     <GridCol {...gridColProps}>
@@ -23,21 +21,21 @@ export const FormInputRadio = function <TData extends FieldValues>({
         name={name}
         rules={rules}
         control={control}
-        render={({ field: { onChange, value = false }, fieldState: { error } }) => (
-          <Radio checked={value} onChange={onChange} error={error?.message} />
-          // <FormControl component='fieldset' error={!!error}>
-          //   <FormLabel component='legend'>{label}</FormLabel>
-          //   <RadioGroup {...radioGroupProps} value={value} onChange={onChange}>
-          //     {options.map(option => (
-          //       <FormControlLabel
-          //         key={option.label}
-          //         {...option}
-          //         control={<Radio {...globalRadioProps} {...option.radioProps} />}
-          //       />
-          //     ))}
-          //   </RadioGroup>
-          //   <FormHelperText>{error ? error.message || ' ' : helperText || ' '}</FormHelperText>
-          // </FormControl>
+        render={({ field: { onChange, value = '' }, fieldState: { error, invalid } }) => (
+          <Radio.Group {...radioGroupProps}>
+            <Group {...groupProps}>
+              {options.map(option => (
+                <Radio
+                  key={option.label?.toString()}
+                  checked={value === option.value}
+                  onChange={onChange}
+                  error={error?.message || invalid}
+                  {...globalRadioProps}
+                  {...option}
+                />
+              ))}
+            </Group>
+          </Radio.Group>
         )}
       />
     </GridCol>
@@ -46,11 +44,11 @@ export const FormInputRadio = function <TData extends FieldValues>({
 
 /** Configuration specific to the RadioInput */
 export type FormInputRadioProps = {
-  options: (SelectOption & {
-    /** Props that will be given to this specific Radio component. These will override the `globalRadioProps` if provided. */
-    radioProps?: RadioProps
-  })[]
-  radioGroupProps?: RadioGroupProps
+  options: RadioProps[]
+  /** Props that will be given to to the `Radio.Group`. This is usually for labels and display attrs  */
+  radioGroupProps?: Omit<RadioGroupProps, 'children'>
+  /** Props that will be given to to the `Group` wrapping the radio buttons. This is usually for spacing and orientation  */
+  groupProps?: GroupProps
   /** Props that will be given to every Radio component */
   globalRadioProps?: RadioProps
   helperText?: string

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { UseFormProps } from 'react-hook-form'
 
-import { MuiFormProvider } from '../providers'
+import { MantineFormProvider } from '../providers'
 
 export const withMantineForm = function <TProps extends Record<string, unknown>>(
   props: UseFormProps,
@@ -9,9 +9,9 @@ export const withMantineForm = function <TProps extends Record<string, unknown>>
 ) {
   return (componentProps: TProps) => {
     return (
-      <MuiFormProvider props={props}>
+      <MantineFormProvider props={props}>
         <Component {...componentProps} />
-      </MuiFormProvider>
+      </MantineFormProvider>
     )
   }
 }

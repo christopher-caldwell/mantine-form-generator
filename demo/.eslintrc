@@ -1,8 +1,0 @@
-{
-  "extends": ["react-app"],
-  "plugins": ["prettier"],
-  "rules": {
-    "@typescript-eslint/no-explicit-an": 2,
-    "prettier/prettier": "error"
-  }
-}

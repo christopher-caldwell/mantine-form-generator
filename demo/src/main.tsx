@@ -1,20 +1,20 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { RecoilRoot } from 'recoil'
+import { MantineProvider } from '@mantine/core'
+import '@mantine/core/styles.css';
 
-import { ChosenThemeProvider, ThemeProvider } from '@/providers'
-import App from './App'
+import { App } from './App'
+import { theme } from './theme'
 import './syntax.css'
 
 ReactDOM.render(
   <StrictMode>
-    <ChosenThemeProvider>
-      <ThemeProvider>
-        <RecoilRoot>
-          <App />
-        </RecoilRoot>
-      </ThemeProvider>
-    </ChosenThemeProvider>
+    <MantineProvider theme={theme}>
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
+    </MantineProvider>
   </StrictMode>,
   document.getElementById('root')
 )

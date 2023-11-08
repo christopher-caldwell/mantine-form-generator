@@ -39,7 +39,7 @@ This is not shown in this example, but is shown in [this one](./example/src/App.
 
 ```tsx
 import { FC, useContext } from 'react'
-import { MuiForm, Config, MuiFormContext } from '@caldwell619/mantine-form-generator'
+import { MuiForm, Config, MantineFormContext } from '@caldwell619/mantine-form-generator'
 import { Button } from '@mantine/material'
 import { UseFormReturn } from 'react-hook-form'
 import { diff } from 'deep-object-diff'
@@ -63,7 +63,7 @@ const inputs: Config<SomeObject>[] = [
 ]
 
 export const Form: FC = () => {
-  const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MuiFormContext)
+  const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MantineFormContext)
   const onSubmit = (data: SomeObject) => {
     console.log('Current state of form', data)
   }
@@ -194,10 +194,10 @@ Sometime wrapping the consumer is tedious, you don't really need it at the next 
 
 ```tsx
 import { UseFormReturn } from 'react-hook-form'
-import { MuiFormContext, MuiForm } from '@caldwell619/mantine-form-generator'
+import { MantineFormContext, MuiForm } from '@caldwell619/mantine-form-generator'
 
 const Form = () => {
-  const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MuiFormContext)
+  const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MantineFormContext)
   return (
     <MuiForm inputs={inputs} gridSpacing={1} />
   )
@@ -216,14 +216,14 @@ In the above, `WrappedForm` is uneccesary.
 
 ### Usage
 
-Using `withMuiForm`, you can access the form config from the same component. It's similar to using `MuiFormContext.Consumer`, but a bit more conveinient.
+Using `withMuiForm`, you can access the form config from the same component. It's similar to using `MantineFormContext.Consumer`, but a bit more conveinient.
 
 ```tsx
 import { UseFormReturn } from 'react-hook-form'
-import { withMuiForm, MuiFormContext, MuiForm } from '@caldwell619/mantine-form-generator'
+import { withMuiForm, MantineFormContext, MuiForm } from '@caldwell619/mantine-form-generator'
 
 export const Home = withMuiForm({ defaultValues }, () => {
-  const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MuiFormContext)
+  const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MantineFormContext)
   return <MuiForm inputs={inputs} gridSpacing={1} />
 })
 ```

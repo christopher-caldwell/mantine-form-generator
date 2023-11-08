@@ -10,6 +10,9 @@
     "strict": true,
     "esModuleInterop": true,
     "baseUrl": "src",
+    "module": "es6",
+    "target": "es5",
+    "moduleResolution": "Node",
     "paths": {
       "@/*": ["*"]
     }

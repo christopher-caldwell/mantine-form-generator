@@ -1,5 +1,5 @@
 import { atom } from 'recoil'
-import { Config } from '@caldwell619/mui-form-generator'
+import { Config } from '@caldwell619/mantine-form-generator'
 
 // import { FormInputDate } from '@/components'
 
@@ -12,7 +12,9 @@ const inputs: Config<SomeObject>[] = [
           required: { value: true, message: 'This is required' },
           pattern: { value: /^[0-9]*$/, message: 'Must be a number' }
         },
-        name: 'one',
+        name: 'one'
+      },
+      textInputProps: {
         label: 'One'
       }
     }
@@ -21,8 +23,10 @@ const inputs: Config<SomeObject>[] = [
     type: 'checkbox',
     config: {
       control: {
-        gridProps: { xs: 12, md: 6 },
-        name: 'isSignedUpForNewsletter',
+        gridColProps: { span: { xs: 12, md: 6 } },
+        name: 'isSignedUpForNewsletter'
+      },
+      checkboxProps: {
         label: 'Sign up for our newsletter?'
       }
     }
@@ -30,7 +34,6 @@ const inputs: Config<SomeObject>[] = [
   {
     type: 'radio',
     config: {
-      radioGroupProps: { row: true },
       options: [
         {
           label: 'Cody',
@@ -42,8 +45,10 @@ const inputs: Config<SomeObject>[] = [
         }
       ],
       control: {
-        gridProps: { xs: 12, md: 6 },
-        name: 'favoriteCommander',
+        gridColProps: { span: { xs: 12, md: 6 } },
+        name: 'favoriteCommander'
+      },
+      radioGroupProps: {
         label: 'Favorite Commander'
       }
     }
@@ -51,19 +56,44 @@ const inputs: Config<SomeObject>[] = [
   {
     type: 'select',
     config: {
-      options: [
-        {
-          label: '501st',
-          value: '501st'
-        },
-        {
-          label: '212th',
-          value: '212th'
-        }
-      ],
       control: {
-        name: 'favoriteUnit',
-        label: 'Favorite Unit'
+        gridColProps: { span: { xs: 12, md: 6 } },
+        name: 'favoriteUnit'
+      },
+      selectProps: {
+        label: 'Favorite Unit - Select',
+        data: [
+          {
+            label: '501st',
+            value: '501st'
+          },
+          {
+            label: '212th',
+            value: '212th'
+          }
+        ]
+      }
+    }
+  },
+  {
+    type: 'select',
+    config: {
+      control: {
+        gridColProps: { span: { xs: 12, md: 6 } },
+        name: 'favoriteUnit'
+      },
+      nativeSelectProps: {
+        label: 'Favorite Unit - Native',
+        data: [
+          {
+            label: '501st',
+            value: '501st'
+          },
+          {
+            label: '212th',
+            value: '212th'
+          }
+        ]
       }
     }
   },
@@ -71,8 +101,10 @@ const inputs: Config<SomeObject>[] = [
     type: 'switch',
     config: {
       control: {
-        gridProps: { xs: 12, md: 6 },
-        name: 'isWifiOn',
+        gridColProps: { span: { xs: 12, md: 6 } },
+        name: 'isWifiOn'
+      },
+      switchProps: {
         label: 'WiFi'
       }
     }
@@ -80,78 +112,48 @@ const inputs: Config<SomeObject>[] = [
   {
     type: 'checkbox',
     config: {
-      helperText: 'Everyone loves ice cream',
+      // helperText: 'Everyone loves ice cream',
       control: {
-        gridProps: { xs: 12, md: 6 },
-        name: 'doesWantIceCream',
+        gridColProps: { span: { xs: 12, md: 6 } },
+        name: 'doesWantIceCream'
+      },
+      checkboxProps: {
         label: 'Do you want Ice Cream?'
       }
     }
-  },
-  {
-    type: 'multiCheckbox',
-    config: {
-      helperText: 'Select all that apply',
-      globalGridProps: { xs: 4 },
-      options: [
-        {
-          label: 'Chocolate'
-        },
-        {
-          label: 'Vanilla'
-        },
-        {
-          label: 'Strawberry'
-        },
-        {
-          label: 'Sherbert'
-        },
-        {
-          label: 'Cookie Dough'
-        },
-        {
-          label: 'Rocky Road'
-        }
-      ],
-      control: {
-        label: 'Options',
-        name: 'options'
-      }
-    }
-  },
-  {
-    type: 'manyOptionsSingleChoice',
-    config: {
-      globalGridProps: { xs: 6 },
-      options: [
-        {
-          label: "Sorccer's Stone"
-        },
-        {
-          label: 'Chamber of Secrets'
-        },
-        {
-          label: 'Prizoner of Azkaban'
-        },
-        {
-          label: 'Goblet of Fire'
-        },
-        {
-          label: 'Order of the Phoenix'
-        },
-        {
-          label: 'Half Blood Prince'
-        },
-        {
-          label: 'Deathly Hallows'
-        }
-      ],
-      control: {
-        name: 'favoriteSeries',
-        label: 'Favorite Series'
-      }
-    }
   }
+  // {
+  //   type: 'multiCheckbox',
+  //   config: {
+  //     helperText: 'Select all that apply',
+  //     globalGridProps: { xs: 4 },
+  //     options: [
+  //       {
+  //         label: 'Chocolate'
+  //       },
+  //       {
+  //         label: 'Vanilla'
+  //       },
+  //       {
+  //         label: 'Strawberry'
+  //       },
+  //       {
+  //         label: 'Sherbert'
+  //       },
+  //       {
+  //         label: 'Cookie Dough'
+  //       },
+  //       {
+  //         label: 'Rocky Road'
+  //       }
+  //     ],
+  //     control: {
+  //       label: 'Options',
+  //       name: 'options'
+  //     }
+  //   }
+  // },
+
   // {
   //   type: 'custom',
   //   config: {
@@ -168,7 +170,7 @@ export const configAtom = atom({
   default: JSON.stringify(inputs, null, '  ')
 })
 
-export interface SomeObject {
+export type SomeObject = {
   one: string
   two: string
   three: string

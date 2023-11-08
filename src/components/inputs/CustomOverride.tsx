@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { GridCol, GridColProps } from '@mantine/core'
 import {
   Path,
@@ -9,7 +8,7 @@ import {
   FieldValues
 } from 'react-hook-form'
 
-import { MuiFormContext } from '@/providers'
+import { useMantineFormContext } from '@/providers'
 import { FormInputProps } from './shared'
 
 export const FormInputCustomOverride = function <TData extends FieldValues>({
@@ -18,7 +17,7 @@ export const FormInputCustomOverride = function <TData extends FieldValues>({
   rules,
   gridColProps
 }: FormInputCustomOverrideProps<TData>) {
-  const { control } = useContext(MuiFormContext)
+  const { control } = useMantineFormContext<TData>()
   return (
     <GridCol {...gridColProps}>
       <Controller<TData> rules={rules} name={name} control={control} render={children} />

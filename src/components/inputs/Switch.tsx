@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Switch, GridCol, SwitchProps } from '@mantine/core'
 import { Controller, FieldValues } from 'react-hook-form'
 
-import { MuiFormContext } from '@/providers'
+import { MantineFormContext } from '@/providers'
 import { FormInputProps } from './shared'
 
 export const FormInputSwitch = function <TData extends FieldValues>({
@@ -12,7 +12,7 @@ export const FormInputSwitch = function <TData extends FieldValues>({
   switchProps,
   gridColProps
 }: Props<TData>) {
-  const { control } = useContext(MuiFormContext)
+  const { control } = useContext(MantineFormContext)
 
   return (
     <GridCol {...gridColProps}>
@@ -20,23 +20,8 @@ export const FormInputSwitch = function <TData extends FieldValues>({
         rules={rules}
         name={name}
         control={control}
-        render={({ field: { onChange, value = false }, fieldState: { error } }) => (
-          <Switch checked={value} onChange={onChange} error={error?.message} {...switchProps} />
-          // <FormGroup {...formGroupProps}>
-          //   <FormControlLabel
-          //     {...formControlLabelProps}
-          //     control={
-          //       <Switch
-          //         {...switchProps}
-          //         checked={value as boolean}
-          //         onChange={onChange}
-          //         inputProps={{ 'aria-label': 'controlled' }}
-          //       />
-          //     }
-          //     label={label}
-          //   />
-          //   <FormHelperText>{error ? error.message || ' ' : helperText || ' '}</FormHelperText>
-          // </FormGroup>
+        render={({ field: { onChange, value = false }, fieldState: { error, invalid } }) => (
+          <Switch checked={value} onChange={onChange} error={error?.message || invalid} {...switchProps} />
         )}
       />
     </GridCol>
