@@ -1,6 +1,6 @@
 {
   "name": "@caldwell619/mantine-form-generator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "homepage": "https://christopher-caldwell.github.io/mantine-form-generator",
   "scripts": {
@@ -8,9 +8,7 @@
     "format": "prettier --write src",
     "build": "tsc && npx tscpaths -p tsconfig.json -s src -o dist",
     "build:watch": "nodemon --exec npm run build --watch src --ext .tsx,.ts --delay 2.5",
-    "release": "standard-version",
-    "publish-release": "git push --follow-tags origin master && yarn publish",
-    "publish:release": "sh publish.sh",
+    "release": "sh publish.sh",
     "predeploy": "cd demo && yarn install && yarn run build",
     "deploy": "gh-pages -d demo/dist"
   },
