@@ -8,7 +8,6 @@ import { FormInputProps } from './shared'
 export const FormInputText = function <TData extends FieldValues>({
   name,
   rules,
-  label,
   textInputProps,
   gridColProps
 }: Props<TData>) {

@@ -1,4 +1,4 @@
-import { GridCol, GridColProps } from '@mantine/core'
+import { GridCol } from '@mantine/core'
 import {
   Path,
   Controller,
@@ -16,7 +16,7 @@ export const FormInputCustomOverride = function <TData extends FieldValues>({
   children,
   rules,
   gridColProps
-}: FormInputCustomOverrideProps<TData>) {
+}: Props<TData>) {
   const { control } = useMantineFormContext<TData>()
   return (
     <GridCol {...gridColProps}>
@@ -32,7 +32,6 @@ export type CustomOverrideRenderArgs<TData extends FieldValues> = {
 }
 export type FormInputCustomOverrideProps<TData extends FieldValues> = {
   children: (options: CustomOverrideRenderArgs<TData>) => JSX.Element
-  name: FormInputProps<TData>['name']
-  rules?: FormInputProps<TData>['rules']
-  gridColProps?: GridColProps
 }
+
+type Props<TData extends FieldValues> = FormInputProps<TData> & FormInputCustomOverrideProps<TData>

@@ -7,7 +7,6 @@ import { FormInputProps } from './shared'
 
 export const FormInputSwitch = function <TData extends FieldValues>({
   name,
-  label,
   rules,
   switchProps,
   gridColProps

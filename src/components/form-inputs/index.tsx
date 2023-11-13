@@ -18,40 +18,38 @@ import {
 import { FieldValues } from 'react-hook-form'
 
 export const FormInput = function <TData extends FieldValues>({ type, config }: Config<TData>) {
-  switch (type) {
-    case 'select': {
-      const { control, ...restProps } = config as unknown as SelectConfig<TData>['config']
-      return <FormInputSelect {...control} {...restProps} />
-    }
-    case 'text': {
-      const { control, ...restProps } = config as unknown as TextConfig<TData>['config']
-      return <FormInputText {...control} {...restProps} />
-    }
-    case 'radio': {
-      const { control, ...restProps } = config as unknown as RadioConfig<TData>['config']
-      return <FormInputRadio {...control} {...restProps} />
-    }
-    case 'checkbox': {
-      const { control, ...restProps } = config as unknown as CheckboxConfig<TData>['config']
-      return <FormInputCheckbox {...control} {...restProps} />
-    }
-    case 'custom': {
-      const { control, ...restProps } = config as unknown as CustomOverrideConfig<TData>['config']
-      return <FormInputCustomOverride {...restProps} {...control} />
-    }
-    case 'switch': {
-      const { control, ...restProps } = config as unknown as SwitchConfig<TData>['config']
-      return <FormInputSwitch {...control} {...restProps} />
-    }
-    case 'multiCheckbox': {
-      const { control, ...restProps } = config as unknown as MultiCheckboxConfig<TData>['config']
-      return <FormInputMultiCheckbox {...control} {...restProps} />
-    }
-    default:
-      throw new Error(
-        `Unsupported input type: ${type} given. Expected one of: 'text', 'select', 'radio', 'custom', 'switch', 'checkbox', 'manyOptionsSingleChoice`
-      )
+  if (type === 'select') {
+    const { control, ...rest } = config
+    return <FormInputSelect {...control} {...rest} />
   }
+  if (type === 'text') {
+    const { control, ...restProps } = config
+    return <FormInputText {...control} {...restProps} />
+  }
+  if (type === 'radio') {
+    const { control, ...restProps } = config
+    return <FormInputRadio {...control} {...restProps} />
+  }
+  if (type === 'checkbox') {
+    const { control, ...restProps } = config
+    return <FormInputCheckbox {...control} {...restProps} />
+  }
+  if (type === 'custom') {
+    const { control, ...restProps } = config
+    return <FormInputCustomOverride {...restProps} {...control} />
+  }
+  if (type === 'switch') {
+    const { control, ...restProps } = config
+    return <FormInputSwitch {...control} {...restProps} />
+  }
+  if (type === 'multiCheckbox') {
+    const { control, ...restProps } = config
+    return <FormInputMultiCheckbox {...control} {...restProps} />
+  }
+
+  throw new Error(
+    `Unsupported input type: ${type} given. Expected one of: 'text', 'select', 'radio', 'custom', 'switch', 'checkbox', 'manyOptionsSingleChoice`
+  )
 }
 type InputControl<TData extends FieldValues> = {
   control: FormInputProps<TData>
@@ -77,9 +75,7 @@ type CheckboxConfig<TData extends FieldValues> = {
 
 type CustomOverrideConfig<TData extends FieldValues> = {
   type: 'custom'
-  config: {
-    control: FormInputCustomOverrideProps<TData>
-  }
+  config: InputControl<TData> & FormInputCustomOverrideProps<TData>
 }
 
 type SwitchConfig<TData extends FieldValues> = {
