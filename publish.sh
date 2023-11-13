@@ -30,8 +30,10 @@ fi
 
 printf "\n\n$BICyan$(echo Bumping the release number..)$Color_Off"
 
-yarn release
+yarn standard-version
 
 printf "\n\n$BICyan$(echo Publishing new version..)$Color_Off"
 
-yarn publish-release
+git push --follow-tags origin master
+
+yarn publish --access=public

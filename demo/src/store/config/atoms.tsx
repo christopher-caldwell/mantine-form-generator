@@ -121,38 +121,50 @@ const inputs: Config<SomeObject>[] = [
         description: 'Everyone loves ice cream'
       }
     }
+  },
+  {
+    type: 'multiCheckbox',
+    config: {
+      checkboxGroupProps: {
+        label: 'Select your favorite ice cream flavors',
+        description: "It's probably all of them"
+      },
+      checkboxGridProps: {
+        mt: 'xs',
+        cols: 3
+      },
+      options: [
+        {
+          label: 'Chocolate',
+          value: 'Chocolate'
+        },
+        {
+          label: 'Vanilla',
+          value: 'Vanilla'
+        },
+        {
+          label: 'Strawberry',
+          value: 'Strawberry'
+        },
+        {
+          label: 'Sherbert',
+          value: 'Sherbert'
+        },
+        {
+          label: 'Cookie Dough',
+          value: 'Cookie Dough'
+        },
+        {
+          label: 'Rocky Road',
+          value: 'Rocky Road'
+        }
+      ],
+      control: {
+        label: 'Options',
+        name: 'options'
+      }
+    }
   }
-  // {
-  //   type: 'multiCheckbox',
-  //   config: {
-  //     helperText: 'Select all that apply',
-  //     globalGridProps: { xs: 4 },
-  //     options: [
-  //       {
-  //         label: 'Chocolate'
-  //       },
-  //       {
-  //         label: 'Vanilla'
-  //       },
-  //       {
-  //         label: 'Strawberry'
-  //       },
-  //       {
-  //         label: 'Sherbert'
-  //       },
-  //       {
-  //         label: 'Cookie Dough'
-  //       },
-  //       {
-  //         label: 'Rocky Road'
-  //       }
-  //     ],
-  //     control: {
-  //       label: 'Options',
-  //       name: 'options'
-  //     }
-  //   }
-  // },
 
   // {
   //   type: 'custom',
