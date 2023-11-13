@@ -1,7 +1,7 @@
 import { GridProps, Grid } from '@mantine/core'
+import { FieldValues } from 'react-hook-form'
 
 import { FormInput, Config } from '@/components'
-import { FieldValues } from 'react-hook-form'
 
 export const MantineForm = function <TData extends FieldValues>({ inputs, gridProps }: Props<TData>) {
   return (
