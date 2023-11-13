@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.1...v0.1.2) (2023-11-13)
+
+
+### Bug Fixes
+
+* Change publish structure ([deb4fee](https://github.com/christopher-caldwell/mantine-form-generator/commit/deb4fee50355d05a7444667eab1fb19a060ae602))
+* Removing old props ([01ecbaf](https://github.com/christopher-caldwell/mantine-form-generator/commit/01ecbaf660c0903f12eab093eed03b5374111610))
+
 ### 0.1.1 (2023-11-13)
 
 
