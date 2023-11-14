@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.5...v0.1.6) (2023-11-14)
+
+
+### Bug Fixes
+
+* Correcting props on checkbox group ([8469d1c](https://github.com/christopher-caldwell/mantine-form-generator/commit/8469d1c838afbcb42532211d9a8b908c32e8e33a))
+
 ### [0.1.5](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.2...v0.1.5) (2023-11-13)
 
 ### [0.1.3](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.2...v0.1.3) (2023-11-13)
