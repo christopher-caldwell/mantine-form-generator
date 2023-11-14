@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.6...v0.1.7) (2023-11-14)
+
+
+### Features
+
+* Adding layout option for forms ([78465fc](https://github.com/christopher-caldwell/mantine-form-generator/commit/78465fc7a8b193dcdf11858c7d8da55e311478ce))
+
 ### [0.1.6](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.5...v0.1.6) (2023-11-14)
 
 
