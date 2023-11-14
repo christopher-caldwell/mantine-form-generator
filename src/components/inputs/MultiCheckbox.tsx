@@ -36,11 +36,11 @@ export const FormInputMultiCheckbox = function <TData extends FieldValues>({
 }
 
 export type FormInputMultiCheckboxProps = {
-  options: CheckboxProps[]
+  options: (CheckboxProps & { value: string })[]
   /** Props given to every `Checkbox` component */
   globalCheckboxProps?: CheckboxProps
   /** Props given to the `CheckboxGroup` component in charge of labels, etc */
-  checkboxGroupProps?: CheckboxGroupProps
+  checkboxGroupProps?: Omit<CheckboxGroupProps, 'children' | 'value' | 'onChange'>
   /** Props given to the `SimpleGrid` component in charge of rendering the layout */
   checkboxGridProps?: SimpleGridProps
 }
