@@ -15,6 +15,7 @@ import {
   FormInputMultiCheckbox,
   FormInputMultiCheckboxProps
 } from '@/components'
+import { FC } from 'react'
 import { FieldValues } from 'react-hook-form'
 
 export const FormInput = function <TData extends FieldValues>({ type, config }: Config<TData>) {
@@ -37,6 +38,9 @@ export const FormInput = function <TData extends FieldValues>({ type, config }: 
   if (type === 'custom') {
     const { control, ...restProps } = config
     return <FormInputCustomOverride {...restProps} {...control} />
+  }
+  if (type === 'layout') {
+    return <config.render />
   }
   if (type === 'switch') {
     const { control, ...restProps } = config
@@ -78,6 +82,13 @@ type CustomOverrideConfig<TData extends FieldValues> = {
   config: InputControl<TData> & FormInputCustomOverrideProps<TData>
 }
 
+type LayoutConfig = {
+  type: 'layout'
+  config: {
+    render: () => JSX.Element
+  }
+}
+
 type SwitchConfig<TData extends FieldValues> = {
   type: 'switch'
   config: InputControl<TData> & FormInputSwitchProps
@@ -96,3 +107,4 @@ export type Config<TData extends FieldValues> =
   | CustomOverrideConfig<TData>
   | SwitchConfig<TData>
   | MultiCheckboxConfig<TData>
+  | LayoutConfig

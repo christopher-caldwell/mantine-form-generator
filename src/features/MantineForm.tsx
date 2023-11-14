@@ -6,9 +6,9 @@ import { FormInput, Config } from '@/components'
 export const MantineForm = function <TData extends FieldValues>({ inputs, gridProps }: Props<TData>) {
   return (
     <Grid {...gridProps}>
-      {inputs.map(input => (
-        <FormInput key={input.config.control.name} {...input} />
-      ))}
+      {inputs.map((input, index) => {
+        return <FormInput key={index} {...input} />
+      })}
     </Grid>
   )
 }
