@@ -1,3 +1,4 @@
+import { FieldValues } from 'react-hook-form'
 import {
   FormInputProps,
   FormInputSelect,
@@ -15,8 +16,6 @@ import {
   FormInputMultiCheckbox,
   FormInputMultiCheckboxProps
 } from '@/components'
-import { FC } from 'react'
-import { FieldValues } from 'react-hook-form'
 
 export const FormInput = function <TData extends FieldValues>({ type, config }: Config<TData>) {
   if (type === 'select') {
