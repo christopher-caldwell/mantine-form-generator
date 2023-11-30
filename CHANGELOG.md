@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.9...v0.1.10) (2023-11-30)
+
+
+### Bug Fixes
+
+* Accounting for null in form values ([#1](https://github.com/christopher-caldwell/mantine-form-generator/issues/1)) ([a142e26](https://github.com/christopher-caldwell/mantine-form-generator/commit/a142e26a31c71b167d5bb2528bdf6d4d5f0329d8))
+
 ### [0.1.9](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.8...v0.1.9) (2023-11-30)
 
 ### [0.1.8](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.7...v0.1.8) (2023-11-22)
