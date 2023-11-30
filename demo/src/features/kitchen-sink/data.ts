@@ -11,5 +11,13 @@ export const defaultValues: SomeObject = {
   doesWantIceCream: false,
   isWifiOn: true,
   options: [],
-  favoriteSeries: ''
+  favoriteSeries: '',
+  nullCheckbox: null
 }
+
+type NullPartial<T> = { [P in keyof T]?: T[P] | null | undefined; }
+
+export const valuesAsNull = Object.keys(defaultValues).reduce<NullPartial<SomeObject>>((acc, key) => {
+  acc[key as string & keyof SomeObject] = null
+  return acc
+}, {})

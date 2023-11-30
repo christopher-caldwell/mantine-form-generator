@@ -18,10 +18,10 @@ export const FormInputText = function <TData extends FieldValues>({
         name={name}
         control={control}
         rules={rules}
-        render={({ field: { onChange, value = '', onBlur }, fieldState: { error, invalid } }) => (
+        render={({ field: { onChange, value, onBlur }, fieldState: { error, invalid } }) => (
           <TextInput
             {...textInputProps}
-            value={value}
+            value={value ?? ''}
             onChange={onChange}
             onBlur={onBlur}
             error={error?.message || invalid}

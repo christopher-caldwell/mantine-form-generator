@@ -18,6 +18,7 @@ import {
 } from '@/components'
 
 export const FormInput = function <TData extends FieldValues>({ type, config }: Config<TData>) {
+  // const { control, ...restProps } = config is done inside the if condition because TS can properly infer the type based on the explicit check of type
   if (type === 'select') {
     const { control, ...rest } = config
     return <FormInputSelect {...control} {...rest} />
