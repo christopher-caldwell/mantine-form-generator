@@ -32,6 +32,18 @@ const inputs: Config<SomeObject>[] = [
     }
   },
   {
+    type: 'checkbox',
+    config: {
+      control: {
+        gridColProps: { span: { xs: 12, md: 6 } },
+        name: 'nullCheckbox'
+      },
+      checkboxProps: {
+        label: 'Can the values be null?'
+      }
+    }
+  },
+  {
     type: 'radio',
     config: {
       options: [
@@ -187,4 +199,5 @@ export type SomeObject = {
   isWifiOn: boolean
   options: string[]
   favoriteSeries: string
+  nullCheckbox: boolean | null
 }

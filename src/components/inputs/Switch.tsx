@@ -19,8 +19,8 @@ export const FormInputSwitch = function <TData extends FieldValues>({
         rules={rules}
         name={name}
         control={control}
-        render={({ field: { onChange, value = false }, fieldState: { error, invalid } }) => (
-          <Switch checked={value} onChange={onChange} error={error?.message || invalid} {...switchProps} />
+        render={({ field: { onChange, value }, fieldState: { error, invalid } }) => (
+          <Switch checked={value ?? false} onChange={onChange} error={error?.message || invalid} {...switchProps} />
         )}
       />
     </GridCol>
