@@ -22,7 +22,12 @@ export const FormInputMultiCheckbox = function <TData extends FieldValues>({
         control={control}
         rules={rules}
         render={({ field: { onChange, value }, fieldState: { error, invalid } }) => (
-          <Checkbox.Group {...checkboxGroupProps} value={value} onChange={onChange} error={error?.message || invalid}>
+          <Checkbox.Group
+            {...checkboxGroupProps}
+            value={value ?? []}
+            onChange={onChange}
+            error={error?.message || invalid}
+          >
             <SimpleGrid {...checkboxGridProps}>
               {options.map((option, index) => {
                 return <Checkbox key={option.name + '-' + index} {...globalCheckboxProps} {...option} />

@@ -19,19 +19,19 @@ export const FormInputSelect = function <TData extends FieldValues>({
         rules={rules}
         name={name}
         control={control}
-        render={({ field: { onChange, value = '', onBlur }, fieldState: { error, invalid } }) => {
+        render={({ field: { onChange, value, onBlur }, fieldState: { error, invalid } }) => {
           return (
             <>
               {nativeSelectProps ? (
                 <NativeSelect
                   {...nativeSelectProps}
-                  value={value}
+                  value={value ?? ''}
                   onChange={onChange}
                   error={error?.message || invalid}
                 />
               ) : (
                 <Select
-                  value={value}
+                  value={value ?? ''}
                   onChange={onChange}
                   onBlur={onBlur}
                   error={error?.message || invalid}
