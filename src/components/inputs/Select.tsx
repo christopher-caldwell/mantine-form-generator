@@ -32,7 +32,7 @@ export const FormInputSelect = function <TData extends FieldValues>({
                 />
               ) : (
                 <Select
-                  value={valueToGive ?? ''}
+                  value={valueToGive ?? null}
                   onChange={onChange}
                   onBlur={onBlur}
                   error={error?.message || invalid}
