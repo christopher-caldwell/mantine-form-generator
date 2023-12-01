@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.10...v0.1.11) (2023-12-01)
+
+
+### Bug Fixes
+
+* Allowing select to hold numeric value ([e62cf54](https://github.com/christopher-caldwell/mantine-form-generator/commit/e62cf5410df4ac0ee7e2f807a8bb902579fd0023))
+
 ### [0.1.10](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.9...v0.1.10) (2023-11-30)
 
 
