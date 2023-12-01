@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.12](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.11...v0.1.12) (2023-12-01)
+
+
+### Bug Fixes
+
+* Finally getting select to clear ([bff0bff](https://github.com/christopher-caldwell/mantine-form-generator/commit/bff0bff794b411e1c29878b0e72136b71c06424d))
+
 ### [0.1.11](https://github.com/christopher-caldwell/mantine-form-generator/compare/v0.1.10...v0.1.11) (2023-12-01)
 
 
