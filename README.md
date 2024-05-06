@@ -120,38 +120,33 @@ Currently, there are only 2 supported inputs, but this list will grow with time.
 If an input you want is not supported, you can _"easily"_ pass your own custom input into the render. For an example, see the [Date override](./example/src/components/Date.tsx).
 
 This is an example of using a Date picker, which is not supported natively by this tool, because they are so specific.
-There are many different kinds, as well as requiring `@mantine/lab` as a peer dependency.
+There are many different kinds, as well as requiring `@mantine/dates` as a peer dependency.
 
 ### Component
 
 ```tsx
-import { CustomOverrideRenderArgs } from '@caldwell619/mantine-form-generator'
+import type { CustomOverrideRenderArgs } from '@caldwell619/mantine-form-generator'
 
-export const FormInputDate: FC<CustomOverrideRenderArgs<SomeObject>> = ({
-  field: { value, onChange },
-  fieldState: { error }
-}) => {
-  return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DateTimePicker
-        value={value}
-        onChange={onChange}
-        renderInput={params => <TextField fullWidth {...params} error={!!error} />}
-      />
-    </LocalizationProvider>
-  )
+export const DateFormInput = function <TData extends FieldValues>({
+  field,
+  fieldState: { error, invalid },
+  dateInputProps
+}: CustomOverrideRenderArgs<TData> & { dateInputProps?: DateInputProps }) {
+  return <DateInput error={error?.message || invalid} {...field} {...dateInputProps} />
 }
 ```
 
 ## Schema API
 
-```ts
+```tsx
 {
   type: 'custom',
   config: {
     control: {
       name: 'startDate',
-      children: props => <FormInputDate {...props} />
+      children(props) {
+        return <DateFormInput {...props} label='Start Date' />
+      }
     }
   }
 }
@@ -194,7 +189,7 @@ Sometime wrapping the consumer is tedious, you don't really need it at the next 
 
 ```tsx
 import { UseFormReturn } from 'react-hook-form'
-import { MantineFormContext, MuiForm } from '@caldwell619/mantine-form-generator'
+import { MantineFormContext, MantineFormProvider } from '@caldwell619/mantine-form-generator'
 
 const Form = () => {
   const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MantineFormContext)
@@ -205,14 +200,14 @@ const Form = () => {
 
 const WrappedForm: FC = () => {
   return (
-    <MuiFormProvider>
+    <MantineFormProvider>
       <Form>
-    </MuiFormProvider>
+    </MantineFormProvider>
   )
 }
 ```
 
-In the above, `WrappedForm` is uneccesary.
+In the above, `WrappedForm` is unnecessary.
 
 ### Usage
 
