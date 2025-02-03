@@ -1,6 +1,7 @@
 {
   "extends": ["react-app"],
   "plugins": ["prettier"],
+  "ignorePatterns": ["./dist/*"],
   "rules": {
     "@typescript-eslint/no-explicit-any": 2,
     "prettier/prettier": "error"

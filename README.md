@@ -12,8 +12,6 @@ An API for crafting Mantine powered forms.
 
 You'll need to fully setup Mantine, following [this](https://mantine.com/getting-started/installation/) guide.
 
-This is based on Mantine v5, using **only** v4 will not work with this.
-
 ## Getting Started
 
 ```shell
@@ -33,16 +31,16 @@ The following will render a single text input with a label of "One".
 
 **You must add a provider that wraps your form FOR EACH FORM YOU USE. **
 
-This is not shown in this example, but is shown in [this one](./example/src/App.tsx), with just the single form.
+This is not shown in this example, but is shown in [this one](./demo/src/App.tsx), with just the single form.
 
 ### Code
 
 ```tsx
 import { FC, useContext } from 'react'
-import { MuiForm, Config, MantineFormContext } from '@caldwell619/mantine-form-generator'
-import { Button } from '@mantine/material'
-import { UseFormReturn } from 'react-hook-form'
+import { MantineForm, Config, MantineFormContext } from '@caldwell619/mantine-form-generator'
+import { Button } from '@mantine/core'
 import { diff } from 'deep-object-diff'
+import type { UseFormReturn } from 'react-hook-form'
 
 export const defaultValues: SomeObject = {
   one: 'Rex',
@@ -69,7 +67,7 @@ export const Form: FC = () => {
   }
   return (
     <form>
-      <MuiForm inputs={inputs} />
+      <MantineForm inputs={inputs} />
       <Button variant='outlined' onClick={handleSubmit(onSubmit)}>
         Submit
       </Button>
@@ -96,11 +94,9 @@ The result is just a single input and your button under it. Clicking submit will
 }
 ```
 
-<img src='./docs/single-input-screen.png' alt='Screen shot showing a single input field' />
-
 ## Detailed Example
 
-There is a working example with a select input and a text field that can be found [here](./example/src/App.tsx)
+There is a working example with a select input and a text field that can be found [here](./demo/src/App.tsx)
 
 ## Supported Inputs
 
@@ -114,52 +110,122 @@ Currently, there are only 2 supported inputs, but this list will grow with time.
 - Text
 - Multi Checkbox ( Select all that apply )
 - Checkbox Radio ( Many options, can only choose one )
+- Layout ( Useful for separating sections )
 
 ## Custom Overrides
 
-If an input you want is not supported, you can _"easily"_ pass your own custom input into the render. For an example, see the [Date override](./example/src/components/Date.tsx).
+If an input you want is not supported, you can _"easily"_ pass your own custom input into the render. For an example, see the [Date override](./demo/src/components/Date.tsx).
+
+<details>
+
+<summary>Some override examples</summary>
+
+### Date
 
 This is an example of using a Date picker, which is not supported natively by this tool, because they are so specific.
-There are many different kinds, as well as requiring `@mantine/lab` as a peer dependency.
-
-### Component
 
 ```tsx
-import { CustomOverrideRenderArgs } from '@caldwell619/mantine-form-generator'
+import { DateInput, DateInputProps } from '@mantine/dates'
+import type  { CustomOverrideRenderArgs } from '@caldwell619/mantine-form-generator'
+import type  { FieldValues } from 'react-hook-form'
+import '@mantine/dates/styles.css'
 
-export const FormInputDate: FC<CustomOverrideRenderArgs<SomeObject>> = ({
-  field: { value, onChange },
-  fieldState: { error }
-}) => {
+export const DateFormInput = function <TData extends FieldValues>({
+  field: { name, value, onChange },
+  fieldState: { error, invalid },
+  dateInputProps
+}: CustomOverrideRenderArgs<TData> & { dateInputProps?: DateInputProps }) {
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DateTimePicker
-        value={value}
-        onChange={onChange}
-        renderInput={params => <TextField fullWidth {...params} error={!!error} />}
-      />
-    </LocalizationProvider>
+    <DateInput {...dateInputProps} value={value} onChange={onChange} error={error?.message || invalid} name={name} />
   )
 }
 ```
 
-## Schema API
+### Text Area
 
-```ts
-{
-  type: 'custom',
-  config: {
-    control: {
-      name: 'startDate',
-      children: props => <FormInputDate {...props} />
-    }
-  }
+```tsx
+import type  { CustomOverrideRenderArgs } from '@caldwell619/mantine-form-generator'
+import { Textarea, TextareaProps } from '@mantine/core'
+import type  { FieldValues } from 'react-hook-form'
+
+export const TextareaFormInput = function <TData extends FieldValues>({
+  field: { name, value, onChange },
+  fieldState: { error, invalid },
+  textareaProps
+}: CustomOverrideRenderArgs<TData> & { textareaProps?: TextareaProps }) {
+  return <Textarea {...textareaProps} error={error?.message || invalid} name={name} value={value} onChange={onChange} />
 }
 ```
 
-## All the inputs together from the example
+### Multi-Select
 
-<img src='./docs/end-result.png' alt='screen shot of all the forms put together' />
+```tsx
+import type { CustomOverrideRenderArgs } from '@caldwell619/mantine-form-generator'
+import { MultiSelect, MultiSelectProps } from '@mantine/core'
+import type { FieldValues } from 'react-hook-form'
+
+export const MultiSelectInput = function <TData extends FieldValues>({
+  field: { name, value, onChange },
+  fieldState: { error, invalid },
+  multiSelectProps
+}: CustomOverrideRenderArgs<TData> & { multiSelectProps?: MultiSelectProps }) {
+  return (
+    <MultiSelect
+      {...multiSelectProps}
+      error={error?.message || invalid}
+      name={name}
+      value={value}
+      onChange={onChange}
+    />
+  )
+}
+```
+
+</details>
+
+</details>
+
+<details>
+<summary>
+A layout example
+</summary>
+
+Along the same line as a custom override, you can also use a `layout` type. This is helpful for grouping form sections, or providing a label.
+
+
+```tsx
+const spacerConfig: Config<SomeObject> = {
+  type: 'layout',
+  config: {
+    render() {
+      return <Space h='lg' />
+    }
+  }
+}
+
+const sectionName: Config<SomeObject> = {
+  type: 'layout',
+  config: {
+    render() {
+      return (
+        <GridCol>
+          <Title order={2} fz="xl">
+            Your Name
+          </Title>
+        </GridCol>
+      )
+    },
+  },
+}
+
+const inputs: Config<SomeObject>[] = [
+  sectionName,
+  spacerConfig
+]
+
+```
+
+</details>
 
 ## Validation
 
@@ -176,15 +242,9 @@ rules: {
 },
 ```
 
-When the error state is met, the message you provide will be shown as the helper text.
-
-If there is not an error, and you do not provide `helperText`, it will be set to an empty string to prevent layout shift should an error occur. This means inputs might be sapced further apart because they essentially have an empty `helperText` to maintain the layout.
-
-<img src='./docs/error.png' alt='The number error being shown' />
-
 ## Bundle Size
 
-The bundle size is a bit deceptive, as the published version is unminified JS. I haven't found the best way to go about this, but it seems as if the best way is to just provide the source, and let you bundle it.
+The bundle size is a bit deceptive, as the published version is un-minified JS. I haven't found the best way to go about this, but it seems as if the best way is to just provide the source, and let you bundle it.
 
 However you React will also tree shake and minify this library. I'm seeing an average of 3-5kb depending on which inputs are used. This will be less if you are already using these inputs elsewhere in the bundle.
 
@@ -192,38 +252,50 @@ However you React will also tree shake and minify this library. I'm seeing an av
 
 Sometime wrapping the consumer is tedious, you don't really need it at the next level, but it has to go somewhere.
 
+Using `withMantineForm`, you can access the form config from the same component. It's similar to using `MantineFormContext.Consumer`, but a bit more convenient.
+
+<details>
+<summary>
+2 React components
+</summary>
+
 ```tsx
 import { UseFormReturn } from 'react-hook-form'
-import { MantineFormContext, MuiForm } from '@caldwell619/mantine-form-generator'
+import { MantineFormContext, MantineForm } from '@caldwell619/mantine-form-generator'
+
+
 
 const Form = () => {
   const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MantineFormContext)
   return (
-    <MuiForm inputs={inputs} gridSpacing={1} />
+    <MantineForm inputs={inputs} gridSpacing={1} />
   )
 }
 
 const WrappedForm: FC = () => {
   return (
-    <MuiFormProvider>
+    <MantineForm>
       <Form>
-    </MuiFormProvider>
+    </MantineForm>
   )
 }
 ```
 
-In the above, `WrappedForm` is uneccesary.
+</details>
 
-### Usage
-
-Using `withMuiForm`, you can access the form config from the same component. It's similar to using `MantineFormContext.Consumer`, but a bit more conveinient.
+<details>
+<summary>
+Higher order wrapper
+</summary>
 
 ```tsx
 import { UseFormReturn } from 'react-hook-form'
-import { withMuiForm, MantineFormContext, MuiForm } from '@caldwell619/mantine-form-generator'
+import { withMantineForm, MantineFormContext, MantineForm } from '@caldwell619/mantine-form-generator'
 
-export const Home = withMuiForm({ defaultValues }, () => {
+export const Home = withMantineForm({ defaultValues }, () => {
   const { handleSubmit } = useContext<UseFormReturn<SomeObject>>(MantineFormContext)
-  return <MuiForm inputs={inputs} gridSpacing={1} />
+  return <MantineForm inputs={inputs} gridSpacing={1} />
 })
 ```
+
+</details>
